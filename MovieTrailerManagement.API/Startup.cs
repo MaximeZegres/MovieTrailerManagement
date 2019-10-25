@@ -31,7 +31,7 @@ namespace MovieTrailerManagement.API
 
             services.AddDbContext<MovieTrailerContext>(options =>
             {
-                options.UseSqlServer((Configuration.GetConnectionString("BloggingDatabase")));
+                options.UseSqlServer((Configuration.GetConnectionString("MovieTrailerDatabase")));
             });
         }
 
