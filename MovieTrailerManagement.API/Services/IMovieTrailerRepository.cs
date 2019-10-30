@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MovieTrailerManagement.API.Services
 {
-    interface IMovieTrailerRepository
+    public interface IMovieTrailerRepository
     {
         IEnumerable<Movie> GetMovies();
         Movie GetMovie(Guid movieId);

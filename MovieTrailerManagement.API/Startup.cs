@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MovieTrailerManagement.API.DbContexts;
+using MovieTrailerManagement.API.Services;
 
 namespace MovieTrailerManagement.API
 {
@@ -28,6 +29,8 @@ namespace MovieTrailerManagement.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddScoped<IMovieTrailerRepository, MovieTrailerRepository>();
 
             services.AddDbContext<MovieTrailerContext>(options =>
             {
