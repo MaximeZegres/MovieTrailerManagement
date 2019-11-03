@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace MovieTrailerManagement.API.Controllers
 {
     [ApiController]
+    [Route("api/movies")]
     public class MoviesController : ControllerBase
     {
         private readonly IMovieTrailerRepository _movieTrailerRepository;
@@ -17,12 +18,21 @@ namespace MovieTrailerManagement.API.Controllers
             _movieTrailerRepository = movieTrailerRepository;
         }
 
-        [HttpGet("api/movies")]
+        [HttpGet]
         public IActionResult GetMovies()
         {
             var moviesFromRepo = _movieTrailerRepository.GetMovies();
             return new JsonResult(moviesFromRepo);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetMovie(Guid id)
+        {
+            var moviefromRepo = _movieTrailerRepository.GetMovie(id);
+            return new JsonResult(moviefromRepo);
+        }
+
+
 
 
 

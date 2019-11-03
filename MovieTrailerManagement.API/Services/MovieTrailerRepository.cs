@@ -21,14 +21,14 @@ namespace MovieTrailerManagement.API.Services
             return _context.Movies.ToList<Movie>();
         }
 
-        public Movie GetMovie(Guid movieId)
+        public Movie GetMovie(Guid id)
         {
-            if (movieId == Guid.Empty)
+            if (id == Guid.Empty)
             {
-                throw new ArgumentNullException(nameof(movieId));
+                throw new ArgumentNullException(nameof(id));
             }
 
-            return _context.Movies.FirstOrDefault(m => m.Id == movieId);
+            return _context.Movies.FirstOrDefault(m => m.Id == id);
 
         }
         public void AddMovie(Movie movie)
@@ -59,14 +59,14 @@ namespace MovieTrailerManagement.API.Services
 
         }
 
-        public bool MovieExists(Guid movieId)
+        public bool MovieExists(Guid id)
         {
-            if (movieId == Guid.Empty)
+            if (id == Guid.Empty)
             {
-                throw new ArgumentNullException(nameof(movieId));
+                throw new ArgumentNullException(nameof(id));
             }
 
-            return _context.Movies.Any(m => m.Id == movieId);
+            return _context.Movies.Any(m => m.Id == id);
         }
 
 
