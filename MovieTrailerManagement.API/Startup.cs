@@ -33,9 +33,8 @@ namespace MovieTrailerManagement.API
             services.AddScoped<IMovieTrailerRepository, MovieTrailerRepository>();
 
             services.AddDbContext<MovieTrailerContext>(options =>
-            {
-                options.UseSqlServer((Configuration.GetConnectionString("MovieTrailerDatabase")));
-            });
+                options.UseSqlServer(Configuration.GetConnectionString("MovieTrailerDatabase")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
