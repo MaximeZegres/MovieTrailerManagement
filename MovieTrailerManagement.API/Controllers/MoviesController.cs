@@ -22,14 +22,20 @@ namespace MovieTrailerManagement.API.Controllers
         public IActionResult GetMovies()
         {
             var moviesFromRepo = _movieTrailerRepository.GetMovies();
-            return new JsonResult(moviesFromRepo);
+            return Ok(moviesFromRepo);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetMovie(Guid id)
         {
             var moviefromRepo = _movieTrailerRepository.GetMovie(id);
-            return new JsonResult(moviefromRepo);
+
+            if (moviefromRepo == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(moviefromRepo);
         }
 
 
