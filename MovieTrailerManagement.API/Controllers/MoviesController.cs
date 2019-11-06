@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MovieTrailerManagement.API.Entities;
 using MovieTrailerManagement.API.Services;
 using System;
 using System.Collections.Generic;
@@ -19,13 +20,15 @@ namespace MovieTrailerManagement.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetMovies()
+        [HttpHead]
+        public ActionResult<IEnumerable<Movie>> GetMovies()
         {
             var moviesFromRepo = _movieTrailerRepository.GetMovies();
             return Ok(moviesFromRepo);
         }
 
         [HttpGet("{id}")]
+        [HttpHead]
         public IActionResult GetMovie(Guid id)
         {
             var moviefromRepo = _movieTrailerRepository.GetMovie(id);
@@ -36,6 +39,12 @@ namespace MovieTrailerManagement.API.Controllers
             }
             
             return Ok(moviefromRepo);
+        }
+
+
+        public ActionResult<Movie> CreateMovie()
+        {
+
         }
 
 
