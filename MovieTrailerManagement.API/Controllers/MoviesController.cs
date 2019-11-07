@@ -27,7 +27,7 @@ namespace MovieTrailerManagement.API.Controllers
             return Ok(moviesFromRepo);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetMovie")]
         [HttpHead]
         public IActionResult GetMovie(Guid id)
         {
@@ -41,10 +41,13 @@ namespace MovieTrailerManagement.API.Controllers
             return Ok(moviefromRepo);
         }
 
-
-        public ActionResult<Movie> CreateMovie()
+        [HttpPost]
+        public ActionResult<Movie> CreateMovie(Movie movie)
         {
-
+            var movieToReturn = movie;
+            _movieTrailerRepository.AddMovie(movieToReturn);
+            _movieTrailerRepository.Save();
+            return CreatedAtRoute("GetMovie", new { id = movieToReturn.Id }, movieToReturn);
         }
 
 
