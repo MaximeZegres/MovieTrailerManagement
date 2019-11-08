@@ -50,8 +50,34 @@ namespace MovieTrailerManagement.API.Controllers
             return CreatedAtRoute("GetMovie", new { id = movieToReturn.Id }, movieToReturn);
         }
 
+        [HttpPut("{id}")]
+        public ActionResult UpdateMovie(Guid id, Movie movie)
+        {
+            if(!_movieTrailerRepository.MovieExists(id))
+            {
+                return NotFound();
+            }
 
+            var movieFromRepo = _movieTrailerRepository.GetMovie(id);
 
+            if (movieFromRepo != null)
+            {
+                movieFromRepo.Id = movie.Id;
+                movieFromRepo.Title = movie.Title;
+                movieFromRepo.ReleaseDate = movie.ReleaseDate;
+                movieFromRepo.UrlImdb = movie.UrlImdb;
+                movieFromRepo.AddedDate = movie.AddedDate;
+                _movieTrailerRepository.Save();
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+
+            
+        }
 
 
     }
