@@ -74,9 +74,28 @@ namespace MovieTrailerManagement.API.Controllers
                 return NotFound();
             }
 
-            return NoContent();
+            return NoContent();      
+        }
 
-            
+        [HttpDelete("{id}")]
+        public ActionResult DeleteMovie(Guid id)
+        {
+            if (!_movieTrailerRepository.MovieExists(id))
+            {
+                return NotFound();
+            }
+
+            var movieFromRepo = _movieTrailerRepository.GetMovie(id);
+
+            if(movieFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _movieTrailerRepository.DeleteMovie(movieFromRepo);
+            _movieTrailerRepository.Save();
+
+            return NoContent();
         }
 
 
