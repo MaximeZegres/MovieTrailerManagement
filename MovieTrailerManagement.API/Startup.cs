@@ -48,8 +48,8 @@ namespace MovieTrailerManagement.API
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("http://example.com",
-                                        "http://www.contoso.com");
+                    builder.WithOrigins("http://localhost:4200/webpack-dev-server/",
+                                        "http://localhost:4200/");
                 });
             });
         }
