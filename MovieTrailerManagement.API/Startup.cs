@@ -24,8 +24,6 @@ namespace MovieTrailerManagement.API
             Configuration = configuration;
         }
 
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -43,15 +41,12 @@ namespace MovieTrailerManagement.API
             services.AddDbContext<MovieTrailerContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MovieTrailerDatabase")));
 
-            services.AddCors(options =>
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
-                options.AddPolicy(MyAllowSpecificOrigins,
-                builder =>
-                {
-                    builder.WithOrigins("http://localhost:4200/webpack-dev-server/",
-                                        "http://localhost:4200/");
-                });
-            });
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +57,7 @@ namespace MovieTrailerManagement.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors("MyPolicy");
 
             app.UseHttpsRedirection();
 
