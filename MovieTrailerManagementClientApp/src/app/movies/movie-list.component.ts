@@ -8,13 +8,17 @@ import { MovieService } from './movie.service';
   styleUrls: ['./movie-list.component.css']
 })
 export class MovieListComponent implements OnInit {
-  movies: any;
+  movies: IMovie[] = [];
+  errorMessage = '';
 
   constructor(private movieService: MovieService) {
   }
 
   ngOnInit() {
-    this.movies = this.movieService.getMovies();
+    this.movieService.getMovies().subscribe({
+      next: movies => this.movies = movies,
+      error: err => this.errorMessage = err
+    });
   }
 
 }
