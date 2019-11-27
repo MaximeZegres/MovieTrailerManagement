@@ -1,10 +1,30 @@
-<div *ngFor="let movie of movies">
-<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">{{ movie.title }}</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+<div *ngFor="let movie of movies" class="content-container">
+<div class="clr-row">
+        <div class="clr-col-lg-4 clr-col-12">
+            <div class="card">
+                <div class="card-header">
+                    {{movie.title}}
+                </div>
+                <div class="card-block">
+                    <div class="card-media-block wrap">
+                        <img src="..." class="card-media-image">
+                        <div class="card-media-description">
+                            <span class="card-media-title">
+                                Release date : {{movie.releaseDate}}
+                            </span>
+                            <span class="card-media-text">
+                                Owner: Jane Doe
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-text">
+                        test
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-link">Action</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
